@@ -1,11 +1,14 @@
+from django.shortcuts import render
 from django.views import generic
 
 from apps.products.models import Product
+# from apps.website.models import WebsiteSettings
 
-class ProductListView(generic.ListView):
+
+class CakeListView(generic.ListView):
     model = Product
     template_name = 'index.html'
-    context_object_name = "products"
+    context_object_name = "cakes"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -16,11 +19,7 @@ class ProductListView(generic.ListView):
         # context['crossy_products'] = Product.objects.filter(category__title="Кроссы")[:4]
         context['nav_categories'] = Product.objects.filter(parent=None)[:4]
 
-        # context['website'] = WebsiteSettings.objects.all().first()
-        # return context
 
 
-class ProductDetailView(generic.DetailView):
-    model = Product
-    slug_field = 'slug'
-    template_name = 'detail.html'
+
+
