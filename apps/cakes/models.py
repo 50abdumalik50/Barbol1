@@ -3,11 +3,11 @@ import os
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
-from utils.image_path import upload_products
+from utils.image_path import upload_cakes
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-class Cakes(MPTTModel):
+class Cake(MPTTModel):
     title = models.CharField(
         max_length=50,
         verbose_name="Название",
@@ -39,8 +39,32 @@ class Cakes(MPTTModel):
         verbose_name="Наследование"
     )
 
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
     def __str__(self):
         return self.title
+
+
+class CakeImage(models.Model):
+        cake = models.ForeignKey(
+            'Cake', on_delete=models.CASCADE,
+            related_name='images',
+            verbose_name="Торт",
+        )
+        image = models.ImageField(
+            upload_to=upload_cakes,
+            verbose_name="Картинка",
+        )
+
+        def delete(self, using=None, keep_parents=False):
+            os.remove(self.image.path)
+            super().delete(using=None, keep_parents=False)
+
+        def __str__(self):
+            return f"{self.image.url}"
+
+
 
 
 

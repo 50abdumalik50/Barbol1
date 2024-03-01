@@ -6,8 +6,8 @@ from utils.image_path import upload_products
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-# class Product(MPTTModel):
-class Product(models.Model):
+
+class Product(MPTTModel):
     title = models.CharField(
         max_length=50,
         verbose_name="Название",
@@ -58,21 +58,21 @@ class Product(models.Model):
         return self.title
 
 
-# class ProductImage(models.Model):
-#     product = models.ForeignKey(
-#         Product, on_delete=models.CASCADE,
-#         related_name='images',
-#         verbose_name="Продукт",
-#     )
-#     image = models.ImageField(
-#         upload_to=upload_products,
-#         verbose_name="Картинка",
-#     )
-#
-#     def delete(self, using=None, keep_parents=False):
-#         os.remove(self.image.path)
-#         super().delete(using=None, keep_parents=False)
-#
-#     def __str__(self):
-#         return f"{self.image.url}"
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE,
+        related_name='images',
+        verbose_name="Продукт",
+    )
+    image = models.ImageField(
+        upload_to=upload_products,
+        verbose_name="Картинка",
+    )
+
+    def delete(self, using=None, keep_parents=False):
+        os.remove(self.image.path)
+        super().delete(using=None, keep_parents=False)
+
+    def __str__(self):
+        return f"{self.image.url}"
 

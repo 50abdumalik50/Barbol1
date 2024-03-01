@@ -1,4 +1,4 @@
-# from django.urls.py import path
+# from django.urls import path
 from django.urls import include, path
 
 from apps.products.views import ProductListView, ProductDetailView

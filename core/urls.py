@@ -7,9 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include('apps.products.urls.py')),
+    path('', include('apps.products.urls')),
     # path('', include('apps.users.urls.py')),
     # path('', include('apps.cart.urls.py')),
+    path('', include('apps.cakes.urls')),
     # path('login/', LoginView.as_view(), name='login'),
     # path('logout/', LogoutView.as_view(), name='logout'),
 

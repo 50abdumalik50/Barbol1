@@ -37,9 +37,6 @@ class QuantityChangeLogics:
 
 
 
-
-
-
 def add_to_favorite(request, product_id):
     if request.method == 'POST':
         form = AddToFavoriteForm(request.POST)
