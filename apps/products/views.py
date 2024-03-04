@@ -1,6 +1,7 @@
 from django.views import generic
-
+from django.shortcuts import render
 from apps.products.models import Product
+
 
 class ProductListView(generic.ListView):
     model = Product
@@ -14,13 +15,13 @@ class ProductListView(generic.ListView):
         # context['palto_products'] = Product.objects.filter(category__title="Пальто")[:4]
         # context['shtany_products'] = Product.objects.filter(category__title="Штаны")[:4]
         # context['crossy_products'] = Product.objects.filter(category__title="Кроссы")[:4]
-        context['nav_categories'] = Product.objects.filter(parent=None)[:4]
+        context['cakes'] = Product.objects.all()
 
-        # context['website'] = WebsiteSettings.objects.all().first()
-        # return context
+def about(request):
+    return render(request, 'about.html')
 
 
-class ProductDetailView(generic.DetailView):
-    model = Product
-    slug_field = 'slug'
-    template_name = 'detail.html'
+# class ProductDetailView(generic.DetailView):
+#     model = Product
+#     slug_field = 'slug'
+#     template_name = 'detail.html'
