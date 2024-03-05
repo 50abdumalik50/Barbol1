@@ -26,14 +26,8 @@ from apps.cakes.models import Cake
 
 class CakeListView(generic.ListView):
     model = Cake
-    template_name = 'torts.html'
-    context_object_name = "cakes"
+    template_name = 'index.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        # context['Cake_chockolate'] = Cake.objects.filter(category__title="Пальто")[:4]
-
-        context['cakes'] = Cake.objects.all()
 
 
 def about(request):
