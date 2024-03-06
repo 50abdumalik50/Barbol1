@@ -1,12 +1,13 @@
+from django.db import models
 import os
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
-from utils.image_path import upload_cakes
+from utils.image_path import upload_flours
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-class Cake(MPTTModel):
+class Flour(MPTTModel):
     title = models.CharField(
         max_length=50,
         verbose_name="Название",
@@ -37,34 +38,22 @@ class Cake(MPTTModel):
         blank=True,
         verbose_name="Наследование"
     )
-    # slug = models.SlugField(
-    #     max_length=100,
-    #     unique=True,
-    #     blank=True,
-    #     null=True,
-    # )
 
     class MPTTMeta:
         order_insertion_by = ['title']
-
-        def get_absolute_url(self):
-            return reverse(
-                'product_detail',
-                kwargs={'slug': self.slug}
-            )
 
     def __str__(self):
         return self.title
 
 
-class CakeImage(models.Model):
-        cake = models.ForeignKey(
-            'Cake', on_delete=models.CASCADE,
+class FlourImage(models.Model):
+        flour = models.ForeignKey(
+            'Flour', on_delete=models.CASCADE,
             related_name='images',
             verbose_name="Торт",
         )
         image = models.ImageField(
-            upload_to=upload_cakes,
+            upload_to=upload_flours,
             verbose_name="Картинка",
         )
 
@@ -74,9 +63,3 @@ class CakeImage(models.Model):
 
         def __str__(self):
             return f"{self.image.url}"
-
-
-
-
-
-

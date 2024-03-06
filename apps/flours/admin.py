@@ -2,25 +2,22 @@
 from django.contrib import admin
 
 
-from apps.cakes.models import Cake, CakeImage
+from apps.flours.models import Flour, FlourImage
 
 
-class CakeImageInline(admin.TabularInline):
-    model = CakeImage
+class FlourImageInline(admin.TabularInline):
+    model = FlourImage
     extra = 1
 
 
-@admin.register(CakeImage)
+@admin.register(FlourImage)
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ['image']
 
 
-@admin.register(Cake)
+@admin.register(Flour)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'price']
     list_filter = ['title', 'price']
     search_fields = ['title']
-    # prepopulated_fields = {'slug': ('title',)}
-    inlines = [CakeImageInline]
-
-# admin.site.register(Cake)
+    inlines = [FlourImageInline]

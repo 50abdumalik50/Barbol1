@@ -6,7 +6,6 @@ from utils.image_path import upload_products
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-
 class Product(MPTTModel):
     title = models.CharField(
         max_length=50,
@@ -38,12 +37,12 @@ class Product(MPTTModel):
         blank=True,
         verbose_name="Наследование"
     )
-    slug = models.SlugField(
-        max_length=100,
-        unique=True,
-        blank=True,
-        null=True,
-    )
+    # slug = models.SlugField(
+    #     max_length=100,
+    #     unique=True,
+    #     blank=True,
+    #     null=True,
+    # )
 
     class MPTTMeta:
         order_insertion_by = ['title']
